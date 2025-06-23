@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { HTTP_BACKEND } from "@/config";
 
 export default function SignupPage() {
     const router = useRouter();
@@ -27,7 +28,7 @@ export default function SignupPage() {
                     email: formData.email,
                     password: formData.password,
                 };
-                const response = await axios.post("/signup", data);
+                const response = await axios.post(`${HTTP_BACKEND}/signup`, data);
                 toast.success("Registered successfully");
                 router.push("/signin");
             } catch (error) {
