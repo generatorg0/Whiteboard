@@ -23,8 +23,14 @@ export default function SigninPage() {
                 const data = {
                     name: formData.name,
                 };
-                const response = await axios.post("/room", data);
-                const roomId = response.data.roomId;
+                const token = localStorage.getItem("token");
+                const response = await axios.post("/room", data, {
+                    headers: {
+                      authorization: `Bearer ${token}`
+                    }
+                });
+                // const response = await axios.post("/room", data);
+                const roomId =  response.data.roomId;
                 toast.success("Room created successfully");
                 router.push("/canvas/"+roomId);
             } catch (error) {
